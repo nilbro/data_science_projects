@@ -94,6 +94,19 @@ time_table_insert = ("""
 INSERT INTO time (start_time, hour, day, week, month, year, weekday)
 VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
 """)
+
+# FIND SONGS
+
+song_select = ("""
+SELECT ss.song_id, ss.artist_id FROM songs ss 
+JOIN artists ars on ss.artist_id = ars.artist_id
+WHERE ss.title = %s
+AND ars.name = %s
+AND ss.duration = %s
+;
+""")
+
+
 # QUERY LISTS
 
 create_table_queries = [songplay_table_create, user_table_create, song_table_create, artist_table_create, time_table_create]
